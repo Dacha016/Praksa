@@ -5,11 +5,11 @@ class Trougao extends GeoTelo{
 // constructor
     public function __construct($stranaA,$stranaB,$stranaC){
 
-        parent:: __construct($stranaA,$stranaB,$stranaC,$visina=null,$precnik=null);
+        parent:: __construct($stranaA,$stranaB,$stranaC,$visina=null,$poluprecnik=null);
     }
 
 // methods
-    public  function proracunObima(){
+    public function proracunObima(){
         $obim=$this->stranaA+$this->stranaB+$this->stranaC;
         echo"<h3>Strane trougla:</h3><p>
         A - $this->stranaA cm </br>
@@ -18,7 +18,7 @@ class Trougao extends GeoTelo{
         Obim trougla je: $obim cm</p>";
        
 }
-    public  function proracunPovrsine(){
+    public function proracunPovrsine(){
         $s=($this->stranaA+$this->stranaB+$this->stranaC)/2;
         $povrsina=sqrt($s*($s-$this->stranaA)*($s-$this->stranaB)*($s-$this->stranaC));
         if(is_int($povrsina)){
@@ -26,7 +26,6 @@ class Trougao extends GeoTelo{
         }else{
             echo"<p>Trougao s tim dimenzijama nije moguc!!!</p>";
         }
-        
     }
 }
 

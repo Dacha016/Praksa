@@ -4,14 +4,14 @@ abstract class GeoTelo{
     protected $stranaB;
     protected $stranaC;
     protected $visina;
-    protected $precnik;
+    protected $poluprecnik;
 // constructor
-    public function __construct($stranaA,$stranaB,$stranaC,$visina,$precnik){
+    public function __construct($stranaA,$stranaB,$stranaC,$visina,$poluprecnik){
         $this->setStranaA($stranaA);
         $this->setStranaB($stranaB);
         $this->setStranaC($stranaC);
         $this->setVisina($visina);
-        $this->setPrecnik($precnik);
+        $this->setPoluprecnik($poluprecnik);
     }
 // setters
     public function setStranaA($stranaA){
@@ -26,8 +26,8 @@ abstract class GeoTelo{
     public function setVisina($visina){
         $this->visina=$visina;
     }
-    public function setPrecnik($precnik){
-        $this->precnik=$precnik;
+    public function setPoluprecnik($poluprecnik){
+        $this->poluprecnik=$poluprecnik;
     }
 // getters
     public function getStranaA(){
@@ -42,8 +42,8 @@ abstract class GeoTelo{
     public function getVisina(){
         return $this->visina;
     }
-    public function getPrecnik(){
-        return $this->precnik;
+    public function getPoluprecnik(){
+        return $this->poluprecnik;
     }
 // methods
 public abstract function proracunObima();
