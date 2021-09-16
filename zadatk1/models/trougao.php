@@ -1,11 +1,11 @@
 <?php
-require "geoTelo.php";
+require "classes/geoTelo.php";
 class Trougao extends GeoTelo{
     
 // constructor
     public function __construct($stranaA,$stranaB,$stranaC){
 
-        parent:: __construct($stranaA,$stranaB,$stranaC);
+        parent:: __construct($stranaA,$stranaB,$stranaC,$visina=null,$precnik=null);
     }
 
 // methods

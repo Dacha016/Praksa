@@ -3,16 +3,15 @@ abstract class GeoTelo{
     protected $stranaA;
     protected $stranaB;
     protected $stranaC;
-    protected $stranaD;
- 
+    protected $visina;
+    protected $precnik;
 // constructor
-    public function __construct($stranaA,$stranaB,$stranaC)
-    {
+    public function __construct($stranaA,$stranaB,$stranaC,$visina,$precnik){
         $this->setStranaA($stranaA);
         $this->setStranaB($stranaB);
         $this->setStranaC($stranaC);
-        
-
+        $this->setVisina($visina);
+        $this->setPrecnik($precnik);
     }
 // setters
     public function setStranaA($stranaA){
@@ -24,10 +23,9 @@ abstract class GeoTelo{
     public function setStranaC($stranaC){
         $this->stranaC=$stranaC;
     }
-    public function setStranaD($stranaD){
-        $this->stranaD=$stranaD;
+    public function setVisina($visina){
+        $this->visina=$visina;
     }
-
     public function setPrecnik($precnik){
         $this->precnik=$precnik;
     }
@@ -41,10 +39,9 @@ abstract class GeoTelo{
     public function getStranaC(){
         return $this->stranaC;
     }
-    public function getStranaD(){
-        return $this->stranaD;
+    public function getVisina(){
+        return $this->visina;
     }
-
     public function getPrecnik(){
         return $this->precnik;
     }

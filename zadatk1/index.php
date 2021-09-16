@@ -1,6 +1,9 @@
 <?php
-require "classes/trougao.php";
-$t= new Trougao(2,4,6);
-$t->proracunObima();
-$t->proracunPovrsine();
+
+require "models/pravougaonik.php";
+
+$p= new Pravougaonik(2,2);
+$p->proracunObima();
+echo "</br>";
+$p->proracunPovrsine();
 ?>
