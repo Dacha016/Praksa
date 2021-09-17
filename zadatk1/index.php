@@ -1,9 +1,9 @@
 <?php
-use App\Krug;
-use App\Pravougaonik;
-use App\Kvadrat;
-use App\Paralelogram;
-use App\Trougao;
+use classes\Krug;
+use classes\Pravougaonik;
+use classes\Kvadrat;
+use classes\Paralelogram;
+use classes\Trougao;
 include "autoloader.php";
 
 

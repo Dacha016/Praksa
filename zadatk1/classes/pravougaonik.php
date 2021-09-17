@@ -1,7 +1,6 @@
 <?php
-namespace App;
-//require "geoTelo.php";
-use App\GeoTelo; 
+namespace classes;
+use model\GeoTelo; 
 class Pravougaonik extends GeoTelo{
 //constructor
     public function __construct($stranaA,$stranaB){
@@ -15,6 +14,6 @@ class Pravougaonik extends GeoTelo{
     public function proracunPovrsine(){
         $povrsina=$this->stranaA*$this->stranaB;
         echo $povrsina;
-}
+    }
 }
 ?>

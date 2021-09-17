@@ -1,6 +1,6 @@
 <?php
-require "geoTelo.php";
-use App\GeoTelo; 
+namespace classes;
+use model\GeoTelo; 
 class Trougao extends GeoTelo{
     
 // constructor
@@ -12,20 +12,16 @@ class Trougao extends GeoTelo{
 // methods
     public function proracunObima(){
         $obim=$this->stranaA+$this->stranaB+$this->stranaC;
-        echo"<h3>Strane trougla:</h3><p>
-        A - $this->stranaA cm </br>
-        B - $this->stranaB cm </br>
-        C - $this->stranaC cm </br>
-        Obim trougla je: $obim cm</p>";
+        echo $obim;
        
 }
     public function proracunPovrsine(){
         $s=($this->stranaA+$this->stranaB+$this->stranaC)/2;
         $povrsina=sqrt($s*($s-$this->stranaA)*($s-$this->stranaB)*($s-$this->stranaC));
         if(is_int($povrsina)){
-            echo "<p>Povrsina trougla je: $povrsina cm2";
+            echo "Povrsina trougla je: $povrsina cm2";
         }else{
-            echo"<p>Trougao s tim dimenzijama nije moguc!!!</p>";
+            echo"Trougao s tim dimenzijama nije moguc!!!";
         }
     }
 }

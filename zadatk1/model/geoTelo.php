@@ -1,5 +1,5 @@
 <?php
-namespace App;
+namespace model;
 abstract class GeoTelo{
     protected $stranaA;
     protected $stranaB;

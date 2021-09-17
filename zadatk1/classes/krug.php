@@ -1,7 +1,6 @@
 <?php
-namespace App;
-//require "geoTelo.php";
-use App\GeoTelo; 
+namespace classes;
+use model\GeoTelo; 
 class Krug extends GeoTelo{
     const PI=3.14;
 //constructor

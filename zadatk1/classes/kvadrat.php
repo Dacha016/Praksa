@@ -1,6 +1,6 @@
 <?php
-//require "geoTelo.php";
-use App\GeoTelo; 
+namespace classes;
+use model\GeoTelo; 
 class Kvadrat extends GeoTelo{
 //constructor
     public function __construct($stranaA){
