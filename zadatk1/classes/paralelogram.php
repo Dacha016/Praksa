@@ -1,5 +1,6 @@
 <?php
-require "classes/geoTelo.php";
+require "model/geoTelo.php";
+use App\GeoTelo; 
 class Paralelogram extends GeoTelo{
     protected $visinaA;
 //constructor

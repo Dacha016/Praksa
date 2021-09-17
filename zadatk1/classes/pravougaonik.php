@@ -1,6 +1,8 @@
 <?php
-require "classes/geoTelo.php";
-class Pravougaonik extends geoTelo{
+namespace App;
+//require "geoTelo.php";
+use App\GeoTelo; 
+class Pravougaonik extends GeoTelo{
 //constructor
     public function __construct($stranaA,$stranaB){
         parent:: __construct($stranaA,$stranaB,$stranaC=null,$visina=null,$poluprecnik=null);
