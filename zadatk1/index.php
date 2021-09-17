@@ -16,12 +16,12 @@ $p->proracunObima();
  $k->proracunObima();
 echo "</br>";
  $k->proracunPovrsine();
-// $k= new Kvadrat(2);
-// $k->proracunObima();
-//   echo "</br>";
-//  $k->proracunPovrsine()
-// $p= new Paralelogram(5,3,2);
-// $p->proracunObima();
-// echo "</br>";
-//$p->proracunPovrsine();
+$kv= new Kvadrat(2);
+ $kv->proracunObima();
+   echo "</br>";
+ $kv->proracunPovrsine();
+$pa= new Paralelogram(5,3,2);
+$pa->proracunObima();
+echo "</br>";
+$pa->proracunPovrsine();
 ?>
