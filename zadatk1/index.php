@@ -7,20 +7,20 @@ use classes\Trougao;
 include "autoloader.php";
 
 
-$p= new Pravougaonik(2,2);
+$p= new Pravougaonik(2,6);
 $p->proracunObima();
  echo "</br>";
  $p->proracunPovrsine();
  echo "</br>";
- $k= new Krug(3);
+ $k= new Krug(6);
  $k->proracunObima();
 echo "</br>";
  $k->proracunPovrsine();
-$kv= new Kvadrat(2);
+$kv= new Kvadrat(4);
  $kv->proracunObima();
    echo "</br>";
  $kv->proracunPovrsine();
-$pa= new Paralelogram(5,3,2);
+$pa= new Paralelogram(5,5,3);
 $pa->proracunObima();
 echo "</br>";
 $pa->proracunPovrsine();
