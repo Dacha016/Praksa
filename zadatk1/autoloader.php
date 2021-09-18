@@ -1,8 +1,7 @@
 <?php
 spl_autoload_register("myAutoloader");
 function myAutoloader($className){
-    $ext=".php";
-    $fPath= str_replace("\\",DIRECTORY_SEPARATOR, strtolower($className)) .$ext;
+    $fPath= str_replace("\\",DIRECTORY_SEPARATOR, strtolower($className)) .".php";
     include_once $fPath;
 }
 ?>
