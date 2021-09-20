@@ -2,28 +2,23 @@
 namespace classes;
 use model\GeoTelo; 
 class Paralelogram extends GeoTelo{
+    protected $stranaA;
+    protected $stranaB;
     protected $visinaA;
 //constructor
-    public function __construct($stranaA,$stranaB,$visinaA){
-        parent::__construct($stranaA,$stranaB,$stranaC=null,$visina=null,$poluprecnik=null);
-        $this->setVisinaA($visinaA);
-    }
-//setters
-    public function setVisinaA($visinaA){
+    public function __construct($stranaA,$visinaA,$stranaB){
+        $this->stranaA=$stranaA;
+        $this->stranaB=$stranaB;
         $this->visinaA=$visinaA;
-    }
-//getters
-    public function getVisinaA(){
-        return $this->visinaA;
     }
 //methods
     public function proracunObima(){
         $obim=2*$this->stranaA+2*$this->stranaB;
-        echo $obim;
+        return $obim;
     }
     public function proracunPovrsine(){
         $povrsina = $this->stranaA*$this->visinaA;
-        echo $povrsina;
+        return $povrsina;
     }
 }
 ?>

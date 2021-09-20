@@ -2,18 +2,21 @@
 namespace classes;
 use model\GeoTelo; 
 class Pravougaonik extends GeoTelo{
+    protected $stranaA;
+    protected $stranaB;
 //constructor
     public function __construct($stranaA,$stranaB){
-        parent:: __construct($stranaA,$stranaB,$stranaC=null,$visina=null,$poluprecnik=null);
+      $this->stranaA=$stranaA;
+      $this->stranaB=$stranaB;
     }
 //methods
     public function proracunObima(){
         $obim=($this->stranaA+$this->stranaB)*2;
-        echo $obim;
+        return $obim;
     }
     public function proracunPovrsine(){
         $povrsina=$this->stranaA*$this->stranaB;
-        echo $povrsina;
+        return $povrsina;
     }
 }
 ?>

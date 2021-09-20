@@ -8,20 +8,20 @@ include "autoloader.php";
 
 
 $p= new Pravougaonik(2,6);
-$p->proracunObima();
- echo "</br>";
- $p->proracunPovrsine();
- echo "</br>";
- $k= new Krug(6);
- $k->proracunObima();
+echo $p->proracunObima();
 echo "</br>";
- $k->proracunPovrsine();
+echo $p->proracunPovrsine();
+echo "</br>";
+$k= new Krug(6);
+echo $k->proracunObima();
+echo "</br>";
+echo $k->proracunPovrsine();
 $kv= new Kvadrat(4);
- $kv->proracunObima();
-   echo "</br>";
- $kv->proracunPovrsine();
-$pa= new Paralelogram(5,5,3);
-$pa->proracunObima();
+echo $kv->proracunObima();
 echo "</br>";
-$pa->proracunPovrsine();
+echo $kv->proracunPovrsine();
+$pa= new Paralelogram(5,5,3);
+echo $pa->proracunObima();
+echo "</br>";
+echo $pa->proracunPovrsine();
 ?>

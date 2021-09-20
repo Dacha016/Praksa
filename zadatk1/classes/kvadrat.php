@@ -2,18 +2,19 @@
 namespace classes;
 use model\GeoTelo; 
 class Kvadrat extends GeoTelo{
+    protected $stranaA; 
 //constructor
     public function __construct($stranaA){
-        parent::__construct($stranaA,$stranaB=null,$stranaC=null,$visina=null,$poluprecnik=null);
+       $this->stranaA=$stranaA;
     }
 //methods
     public function proracunObima(){
         $obim = 4* $this->stranaA;
-        echo $obim;
+        return $obim;
     }
     public function proracunPovrsine(){
         $povrsina = $this->stranaA*$this->stranaA;
-        echo $povrsina; 
+        return $povrsina; 
     }
 }
 ?>
