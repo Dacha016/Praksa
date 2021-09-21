@@ -10,6 +10,7 @@ class Praktikant{
     public function __construct($db){
         $this->conn=$db;
     }
+    
 //Read
     public function read(){
         $q="SELECT * FROM ".$this->table;
