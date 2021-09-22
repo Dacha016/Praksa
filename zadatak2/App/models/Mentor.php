@@ -1,5 +1,7 @@
 <?php
-use App\Models\Zaposleni;
+
+
+//require_once "Zaposleni.php";
 class Mentor extends Zaposleni{
     private $conn;
     private $table="Mentori";

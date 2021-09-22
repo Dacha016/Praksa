@@ -2,11 +2,15 @@
 header("Access-Control-Allow-Origin: *");
 header("Content-Type:aplication/json");
 require_once "../config/connection.php";
-require_once "../models/Mentor.php";
+require_once "../vendor/autoload.php";
+use Models;
 
 $database=new Database;
+
 $db=$database->connect();
+
 $praktikant= new Mentor($db);
+
 $res=$praktikant->procitaj();
 $n=$res->rowCount();
 if($n>0){
