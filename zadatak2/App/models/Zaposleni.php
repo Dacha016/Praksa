@@ -1,5 +1,5 @@
 <?php
-
+namespace App\Models;
 abstract class Zaposleni{
     public $id;
     public $ime;

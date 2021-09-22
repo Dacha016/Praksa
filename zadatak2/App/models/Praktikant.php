@@ -1,5 +1,5 @@
 <?php
-require_once "Zaposleni.php";
+use App\Models\Zaposleni;
 class Praktikant extends Zaposleni{
     private $conn;
     private $table="Praktikanti";
