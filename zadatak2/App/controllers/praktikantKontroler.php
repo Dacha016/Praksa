@@ -1,20 +1,16 @@
 <?php
 header("Access-Control-Allow-Origin: *");
 header("Content-Type:aplication/json");
-include_once "../config/connection.php";
-include_once "../models/Praktikant.php";
+require_once "../config/connection.php";
+require_once "../models/Praktikant.php";
 
 $database=new Database;
 $db=$database->connect();
 $praktikant= new Praktikant($db);
-
-$res=$praktikant->read();
-
+$res=$praktikant->procitaj();
 $n=$res->rowCount();
-
 if($n>0){
     $prArr=[];
-   
     while($row= $res->fetch(PDO::FETCH_ASSOC)){
         extract($row);
         $pr=[
@@ -26,9 +22,7 @@ if($n>0){
     }
     echo json_encode($prArr);
 }else{
-
-    echo 
-        "Poruka Ne postoje podaci"
-    ;
+    echo json_encode(["Poruka:"=>"Ne postoje podaci"]);
 }
 ?>
+
