@@ -1,21 +1,29 @@
 <?php
-class Praktikant{
+require_once "Zaposleni.php";
+class Praktikant extends Zaposleni{
     private $conn;
     private $table="Praktikanti";
-    public $id;
-    public $ime;
-    public $prezime;
-
-//constructor
+ 
+//konstruktor
     public function __construct($db){
         $this->conn=$db;
     }
-//Read
-    public function read(){
+    
+//metode
+    public function kreiraj(){
+
+    }
+    public function procitaj(){
         $q="SELECT * FROM ".$this->table;
         $stmt=$this->conn->prepare($q);
         $stmt->execute();
         return $stmt;
+    }
+    public function izmeni(){
+
+    }
+    public function obrisi(){
+
     }
 }
 
