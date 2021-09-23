@@ -1,7 +1,7 @@
 <?php
-
-
-//require_once "Zaposleni.php";
+//namespace Models;
+//use Zaposleni;
+require_once "Zaposleni.php";
 class Mentor extends Zaposleni{
     private $conn;
     private $table="Mentori";

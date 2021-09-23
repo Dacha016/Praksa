@@ -4,6 +4,6 @@
 
 $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname($vendorDir);
-
+var_dump($vendorDir);
 return array(
 );

@@ -1,5 +1,7 @@
 <?php
-
+//namespace Models;
+//use Zaposleni;
+require_once "Zaposleni.php";
 class Praktikant extends Zaposleni{
     private $conn;
     private $table="Praktikanti";
@@ -8,17 +10,25 @@ class Praktikant extends Zaposleni{
     public function __construct($db){
         $this->conn=$db;
     }
-    
-<<<<<<< HEAD:zadatak2/models/Praktikant.php
-//Read
-    public function read(){
-=======
+
 //metode
     public function kreiraj(){
-
+        $q="INSERT INTO ".$this->table. "(Ime, Prezime) VALUES (".$this->Ime.", ". $this->Prezime.")";
+        $stmt=$this->conn->prepare($q);
+        var_dump($stmt);
+      
+        $stmt->execute([
+            "Ime"=>$this->Ime,
+            "Prezime"=>$this->Prezime
+        ]);
+        
+        if($stmt->execute()){
+            return true;
+        }else{
+            printf("Error");
+        }
     }
     public function procitaj(){
->>>>>>> f17d70c1f2631ef901836ea7c533534d9aa720ac:zadatak2/App/models/Praktikant.php
         $q="SELECT * FROM ".$this->table;
         $stmt=$this->conn->prepare($q);
         $stmt->execute();
