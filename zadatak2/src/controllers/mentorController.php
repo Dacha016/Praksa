@@ -3,8 +3,7 @@ header("Access-Control-Allow-Origin: *");
 header("Content-Type:aplication/json");
 require_once "../config/connection.php";
 require_once "../models/Mentor.php";
-//use Config\Database\Dadabase;
-//use Models\Mentor\Mentor;
+
 
 $database=new Database;
 
