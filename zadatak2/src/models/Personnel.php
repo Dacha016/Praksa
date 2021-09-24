@@ -9,7 +9,7 @@ abstract class Personnel{
             $stmt=$this->conn->prepare($q);
             $stmt->execute();
             return $stmt;
-        }catch(PDOException $e){
+        }catch(\PDOException $e){
             exit($e->getMessage());
         }
     }
@@ -23,7 +23,7 @@ abstract class Personnel{
             $stmt->bindParam(":surname",$p["Surname"]);
             $stmt->execute();
             return $stmt;
-        }catch(Exception $e){
+        }catch(\PDOException $e){
             exit($e->getMessage());
         }
     }
@@ -37,7 +37,7 @@ abstract class Personnel{
             $stmt->execute();
         
             return $stmt;
-        }catch(PDOException $e){
+        }catch(\PDOException $e){
             exit($e->getMessage());
         }
     }
@@ -48,7 +48,7 @@ abstract class Personnel{
             $stmt->bindParam(":id",$id);
             $stmt->execute();
             return $stmt;
-        }catch(PDOException $e){
+        }catch(\PDOException $e){
             exit($e->getMessage());
         }
     }

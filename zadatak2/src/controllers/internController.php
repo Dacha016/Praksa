@@ -1,14 +1,11 @@
 <?php
+namespace App\Controllers;
 require_once realpath("vendor/autoload.php");
-// require_once "../config/connection.php";
-// require_once "../models/Intern.php";
-// use App\Config\Database as Database;
-// use App\Models\Intern;
+use App\Config\Connection;
+use App\Models\Intern;
 
-$database=new Database;
-
+$database=new Connection;
 $db=$database->connect();
-
 $intern= new Intern($db);
 
 // $res=$intern->read();

@@ -1,31 +1,29 @@
 <?php
-header("Access-Control-Allow-Origin: *");
-header("Content-Type:aplication/json");
-require_once "../config/connection.php";
-require_once "../models/Mentor.php";
+namespace App\Controllers;
+use App\Config\Connection;
+use App\Models\Mentor;
 
-
-$database=new Database;
-
+$database=new Connection;
 $db=$database->connect();
-
 $mentor= new Mentor($db);
 
-$res=$mentor->procitaj();
-$n=$res->rowCount();
-if($n>0){
-    $mnArr=[];
-    while($row= $res->fetch(PDO::FETCH_ASSOC)){
-        extract($row);
-        $mn=[
-            "id"=>$row["idMentor"],
-            "Ime"=>$row["Ime"],
-            "Prezime"=>$row["Prezime"]
-        ];
-        array_push($mnArr,$mn);
-    }
-    echo json_encode($mnArr);
-}else{
-    echo json_encode(["Poruka"=>"Ne postoje podaci"]);
-}
+// $res=$intern->read();
+
+// $n=$res->rowCount();
+
+// if($n>0){
+//     $inArr=[];
+//     while($row= $res->fetch(PDO::FETCH_ASSOC)){
+//         extract($row);
+//         $in=[
+//             "id"=>$row["id"],
+//             "Name"=>$row["Name"],
+//             "Surname"=>$row["Surname"]
+//         ];
+//         array_push($inArr,$in);
+//     }
+//     echo json_encode($inArr);
+// }else{
+//     echo json_encode(["Poruka:"=>"Ne postoje podaci"]);
+// }
 ?>
