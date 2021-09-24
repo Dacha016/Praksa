@@ -2,7 +2,7 @@
 namespace App\Models;
 use App\Models\Personnel;
 
-class Mentor extends Personnel{
+class Group extends Personnel{
     protected $conn;
     protected $table="Groups";
     
