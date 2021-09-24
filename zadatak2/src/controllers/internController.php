@@ -1,6 +1,6 @@
 <?php
 namespace App\Controllers;
-require_once realpath("vendor/autoload.php");
+require realpath("../../vendor/autoload.php");
 use App\Config\Connection;
 use App\Models\Intern;
 
@@ -27,4 +27,4 @@ $intern= new Intern($db);
 // }else{
 //     echo json_encode(["Poruka:"=>"Ne postoje podaci"]);
 // }
-$res=$intern->create(["Name"=>"Rade","Surname"=>"Radic"]);
+$res=$intern->create(["Name"=>"Mara","Surname"=>"Simic"]);
