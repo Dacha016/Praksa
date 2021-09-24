@@ -3,28 +3,18 @@ namespace App\Controllers;
 require realpath("../../vendor/autoload.php");
 use App\Config\Connection;
 use App\Models\Intern;
+class InternController{
+    protected $db;
+    protected $requireMrthod;
+    protected $userId;
+    public function __construct( $db, $requestMethod, $userId)
+    {
 
-$database=new Connection;
-$db=$database->connect();
-$intern= new Intern($db);
+        $this->requestMethod = $requestMethod;
+        $this->userId = $userId;
 
-// $res=$intern->read();
+        $this->personGateway = new Intern($db);
+    }
+}
 
-// $n=$res->rowCount();
-
-// if($n>0){
-//     $inArr=[];
-//     while($row= $res->fetch(PDO::FETCH_ASSOC)){
-//         extract($row);
-//         $in=[
-//             "id"=>$row["id"],
-//             "Name"=>$row["Name"],
-//             "Surname"=>$row["Surname"]
-//         ];
-//         array_push($inArr,$in);
-//     }
-//     echo json_encode($inArr);
-// }else{
-//     echo json_encode(["Poruka:"=>"Ne postoje podaci"]);
-// }
-$res=$intern->create(["Name"=>"Mara","Surname"=>"Simic"]);
+//
