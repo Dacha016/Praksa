@@ -2,9 +2,19 @@
 namespace App\Models;
 abstract class Personnel{
 // methods
-    public function read(){
+    public function read($id){
+        $q="SELECT * FROM ".$this->table ."WHERE id=:id";
+        try{
+            $stmt=$this->conn->prepare($q);
+            $stmt->bindParam(":id",$id);
+            $stmt->execute();
+            return $stmt;
+        }catch(\PDOException $e){
+            exit($e->getMessage());
+        }
+    }
+    public function readAll(){
         $q="SELECT * FROM ".$this->table;
-    
         try{
             $stmt=$this->conn->prepare($q);
             $stmt->execute();
@@ -15,7 +25,6 @@ abstract class Personnel{
     }
     public  function create(Array $p){
         $q="INSERT INTO ".$this->table. " (Name,Surname) VALUES (:name, :surname)";
-        
         try{
             $stmt=$this->conn->prepare($q);
             print_r($stmt);
