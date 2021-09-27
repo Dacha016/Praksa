@@ -7,9 +7,8 @@ class Intern extends Personnel {
     protected $table="Interns";
  
 //construct
-    public function __construct($d){
-        $this->conn;
-        
+    public function __construct($db){
+        $this->conn=$db;
     }
 }
 ?>

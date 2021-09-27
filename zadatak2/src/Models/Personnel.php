@@ -24,11 +24,12 @@ abstract class Personnel {
         }
     }
     public  function create(Array $p){
-        $q="INSERT INTO ".$this->table. " (Name,Surname) VALUES (:name, :surname)";
+        $q="INSERT INTO ".$this->table. " (Name,Surname,idG) VALUES (:name, :surname,:idG)";
         try{
             $stmt=$this->conn->prepare($q);
             $stmt->bindParam(":name",$p["Name"]);
             $stmt->bindParam(":surname",$p["Surname"]);
+            $stmt->bindParam(":idG",$p["idG"]);
             $stmt->execute();
             return $stmt;
         }catch(\PDOException $e){

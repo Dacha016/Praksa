@@ -1,17 +1,18 @@
 <?php
 namespace App\Controllers;
-use App\Config\Connection;
+
 use App\Models\Intern;
 class InternController{
     public $db;
-    protected $requestMrthod;
-    protected $internId;
-    public function __construct( $db, $requestMethod, $internId){
-        $this->db= new Connection;
-        $this->db->connect();
+    protected $requestMethod;
+    
+    protected $intern;
+    public function __construct( $db, $requestMethod){
+        $this->db = $db;
         $this->requestMethod = $requestMethod;
         $this->internId = $internId;
         $this->intern = new Intern($db);
+
     }
     public function processRequest(){
         switch ($this->requestMethod){
@@ -41,7 +42,7 @@ class InternController{
         }
     }
 
-    private function readAll()
+    public function readAll()
     {
         $result = $this->intern->readAll();
         $response['status_code_header'] = 'HTTP/1.1 200 OK';
@@ -60,13 +61,13 @@ class InternController{
         return $response;
     }
 
-    private function create()
+    public function create()
     {
         $input = (array) json_decode(file_get_contents('php://input'), TRUE);
         if (! $this->validate($input)) {
             return $this->unprocessableEntityResponse();
         }
-        $this->intern->insert($input);
+        $this->intern->create($input);
         $response['status_code_header'] = 'HTTP/1.1 201 Created';
         $response['body'] = null;
         return $response;
@@ -127,6 +128,7 @@ class InternController{
         return $response;
     }
 }
+
 
 
 
