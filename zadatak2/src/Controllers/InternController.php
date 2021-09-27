@@ -1,13 +1,14 @@
 <?php
 namespace App\Controllers;
-require realpath("../../vendor/autoload.php");
 use App\Config\Connection;
 use App\Models\Intern;
 class InternController{
-    protected $db;
-    protected $requireMrthod;
+    public $db;
+    protected $requestMrthod;
     protected $internId;
     public function __construct( $db, $requestMethod, $internId){
+        $this->db= new Connection;
+        $this->db->connect();
         $this->requestMethod = $requestMethod;
         $this->internId = $internId;
         $this->intern = new Intern($db);
@@ -126,5 +127,6 @@ class InternController{
         return $response;
     }
 }
+
 
 

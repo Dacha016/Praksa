@@ -22,6 +22,8 @@ class ComposerStaticInit5494b667fca8def96a1cf08e16cde14f
 
     public static $classMap = array (
         'App\\Config\\Connection' => __DIR__ . '/../..' . '/src/Config/Connection.php',
+        'App\\Controllers\\InternController' => __DIR__ . '/../..' . '/src/Controllers/InternController.php',
+        'App\\Controllers\\MentorController' => __DIR__ . '/../..' . '/src/Controllers/MentorController.php',
         'App\\Models\\Group' => __DIR__ . '/../..' . '/src/Models/Group.php',
         'App\\Models\\Intern' => __DIR__ . '/../..' . '/src/Models/Intern.php',
         'App\\Models\\Mentor' => __DIR__ . '/../..' . '/src/Models/Mentor.php',

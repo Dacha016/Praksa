@@ -1,6 +1,6 @@
 <?php
 namespace App\Models;
-abstract class Personnel{
+abstract class Personnel {
 // methods
     public function read($id){
         $q="SELECT * FROM ".$this->table ."WHERE id=:id";
@@ -27,7 +27,6 @@ abstract class Personnel{
         $q="INSERT INTO ".$this->table. " (Name,Surname) VALUES (:name, :surname)";
         try{
             $stmt=$this->conn->prepare($q);
-            print_r($stmt);
             $stmt->bindParam(":name",$p["Name"]);
             $stmt->bindParam(":surname",$p["Surname"]);
             $stmt->execute();

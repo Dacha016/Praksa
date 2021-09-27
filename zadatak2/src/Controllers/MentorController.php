@@ -1,13 +1,13 @@
 <?php
 namespace App\Controllers;
 require realpath("../../vendor/autoload.php");
-use App\Config\Connection;
+//use App\Config\Connection;
 use App\Models\Mentor;
 class MentorController{
     protected $db;
     protected $requireMrthod;
     protected $internId;
-    public function __construct( $db, $requestMethod, $internId){
+    public function __construct( $db, $requestMethod, $mentorId){
         $this->requestMethod = $requestMethod;
         $this->mentorId = $mentorId;
         $this->mentor = new Mentor($db);
@@ -40,16 +40,14 @@ class MentorController{
         }
     }
 
-    private function readAll()
-    {
+    private function readAll(){
         $result = $this->mentor->readAll();
         $response['status_code_header'] = 'HTTP/1.1 200 OK';
         $response['body'] = json_encode($result);
         return $response;
     }
 
-    private function read($id)
-    {
+    private function read($id){
         $result = $this->mentor->read($id);
         if (! $result) {
             return $this->notFoundResponse();
@@ -59,8 +57,7 @@ class MentorController{
         return $response;
     }
 
-    private function create()
-    {
+    private function create(){
         $input = (array) json_decode(file_get_contents('php://input'), TRUE);
         if (! $this->validate($input)) {
             return $this->unprocessableEntityResponse();
@@ -71,8 +68,7 @@ class MentorController{
         return $response;
     }
 
-    private function update($id)
-    {
+    private function update($id){
         $result = $this->mentor->read($id);
         if (! $result) {
             return $this->notFoundResponse();
@@ -87,8 +83,7 @@ class MentorController{
         return $response;
     }
 
-    private function delete($id)
-    {
+    private function delete($id){
         $result = $this->mentor->read($id);
         if (! $result) {
             return $this->notFoundResponse();
@@ -99,8 +94,7 @@ class MentorController{
         return $response;
     }
 
-    private function validate($input)
-    {
+    private function validate($input){
         if (! isset($input['Name'])) {
             return false;
         }
@@ -110,8 +104,7 @@ class MentorController{
         return true;
     }
 
-    private function unprocessableEntityResponse()
-    {
+    private function unprocessableEntityResponse(){
         $response['status_code_header'] = 'HTTP/1.1 422 Unprocessable Entity';
         $response['body'] = json_encode([
             'error' => 'Invalid input'
@@ -119,8 +112,7 @@ class MentorController{
         return $response;
     }
 
-    private function notFoundResponse()
-    {
+    private function notFoundResponse(){
         $response['status_code_header'] = 'HTTP/1.1 404 Not Found';
         $response['body'] = null;
         return $response;
