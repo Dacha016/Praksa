@@ -14,12 +14,10 @@ class InternController{
         $this->intern = new Intern($db);
     }
 
-    public function readAll()
-    {
+    public function readAll(){
         $result = $this->intern->readAll();
         $response['status_code_header'] = 'HTTP/1.1 200 OK';
         $n=$result->rowCount();
-
         if($n>0){
             $inArr=[];
             while($row= $result->fetch(\PDO::FETCH_ASSOC)){
@@ -33,61 +31,75 @@ class InternController{
                 array_push($inArr,$in);
             }
         echo json_encode($inArr);
-    }
+        // $response['body'] = json_encode($in);
+        // return $response;
+        }
     }
 
-    public function read($id)
-    {
-        $result = $this->intern->read($id);
-        if (! $result) {
+    public function read($internId){
+         $result = $this->intern->read($internId);
+         if (! $result) {
             return $this->notFoundResponse();
         }
         $response['status_code_header'] = 'HTTP/1.1 200 OK';
-        $response['body'] = json_encode($result);
-        return $response;
+         $row= $result->fetch(\PDO::FETCH_ASSOC);
+         $in=[
+            "id"=>$row["id"],
+            "Name"=>$row["Name"],
+            "Surname"=>$row["Surname"],
+            "idG"=>$row["idG"]
+        ];
+        echo json_encode($in);
+        // $response['body'] = json_encode($in);
+        // return $response;
     }
 
-    public function create(array $input)
+    public function create()
     {
-        if (! $this->validate($input)) {
+        if (! $this->validate( $input)) {
             return $this->unprocessableEntityResponse();
         }
-        $this->intern->create($input);
+        $res=$this->intern->create($input);
+        var_dump($res);
         $response['status_code_header'] = 'HTTP/1.1 201 Created';
         
         return $response;
     }
 
-    public function update($id)
+    public function update($internId)
     {
-        $result = $this->intern->read($id);
-        if (! $result) {
+        $result = $this->intern->read($internId);
+        $row= $result->fetch(\PDO::FETCH_ASSOC);
+        
+        if (! $row) {
             return $this->notFoundResponse();
         }
-        $input = (array) json_decode(file_get_contents('php://input'), TRUE);
-        if (! $this->validate($input)) {
-            return $this->unprocessableEntityResponse();
-        }
-        $this->intern->update($id, $input);
-        $response['status_code_header'] = 'HTTP/1.1 200 OK';
-        $response['body'] = null;
-        return $response;
-    }
-
-    public function delete($id)
-    {
-        // $result = $this->intern->read($id);
-        // if (! $result) {
-        //     return $this->notFoundResponse();
+        
+        // if (! $this->validate($input)) {
+        //     return $this->unprocessableEntityResponse();
         // }
-        $this->intern->delete($id);
+        
+        $this->intern->update($id, $input);
+       
         $response['status_code_header'] = 'HTTP/1.1 200 OK';
         $response['body'] = null;
         return $response;
     }
 
-    private function validate($input)
-    {
+    public function delete($internId){
+        $result = $this->intern->read($internId);
+        $row= $result->fetch(\PDO::FETCH_ASSOC);
+        if (! $row) {
+            return $this->notFoundResponse();
+            
+        }else{
+            $this->intern->delete($internId);
+            $response['status_code_header'] = 'HTTP/1.1 200 OK';
+        }
+        return $response;
+    }
+
+    private function validate($input){
         if (! isset($input['Name'])) {
             return false;
         }
@@ -101,8 +113,7 @@ class InternController{
         return true;
     }
 
-    private function unprocessableEntityResponse()
-    {
+    private function unprocessableEntityResponse(){
         $response['status_code_header'] = 'HTTP/1.1 422 Unprocessable Entity';
         $response['body'] = json_encode([
             'error' => 'Invalid input'
@@ -110,14 +121,9 @@ class InternController{
         return $response;
     }
 
-    private function notFoundResponse()
-    {
+    private function notFoundResponse(){
         $response['status_code_header'] = 'HTTP/1.1 404 Not Found';
         $response['body'] = null;
         return $response;
     }
 }
-
-
-
-

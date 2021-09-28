@@ -43,7 +43,7 @@ class MentorController{
     private function readAll(){
         $result = $this->mentor->readAll();
         $response['status_code_header'] = 'HTTP/1.1 200 OK';
-        $response['body'] = json_encode($result);
+        $response = json_encode($result);
         return $response;
     }
 
