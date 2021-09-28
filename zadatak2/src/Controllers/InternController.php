@@ -5,52 +5,38 @@ use App\Models\Intern;
 class InternController{
     public $db;
     protected $requestMethod;
-    
+    protected  $internId;
     protected $intern;
-    public function __construct( $db, $requestMethod){
+    public function __construct( $db, $requestMethod,$internId){
         $this->db = $db;
         $this->requestMethod = $requestMethod;
         $this->internId = $internId;
         $this->intern = new Intern($db);
-
-    }
-    public function processRequest(){
-        switch ($this->requestMethod){
-            case 'GET':
-                if ($this->internId) {
-                    $response = $this->read($this->internId);
-                } else {
-                    $response = $this->readAll();
-                };
-                break;
-            case 'POST':
-                $response = $this->create();
-                break;
-            case 'PUT':
-                $response = $this->update($this->internId);
-                break;
-            case 'DELETE':
-                $response = $this->delete($this->internId);
-                break;
-            default:
-                $response = $this->notFoundResponse();
-                break;
-        }
-        header($response['status_code_header']);
-        if ($response['body']) {
-            echo $response['body'];
-        }
     }
 
     public function readAll()
     {
         $result = $this->intern->readAll();
         $response['status_code_header'] = 'HTTP/1.1 200 OK';
-        $response['body'] = json_encode($result);
-        return $response;
+        $n=$result->rowCount();
+
+        if($n>0){
+            $inArr=[];
+            while($row= $result->fetch(\PDO::FETCH_ASSOC)){
+                extract($row);
+                $in=[
+                    "id"=>$row["id"],
+                    "Name"=>$row["Name"],
+                    "Surname"=>$row["Surname"],
+                    "idG"=>$row["idG"]
+                ];
+                array_push($inArr,$in);
+            }
+        echo json_encode($inArr);
+    }
     }
 
-    private function read($id)
+    public function read($id)
     {
         $result = $this->intern->read($id);
         if (! $result) {
@@ -61,19 +47,18 @@ class InternController{
         return $response;
     }
 
-    public function create()
+    public function create(array $input)
     {
-        $input = (array) json_decode(file_get_contents('php://input'), TRUE);
         if (! $this->validate($input)) {
             return $this->unprocessableEntityResponse();
         }
         $this->intern->create($input);
         $response['status_code_header'] = 'HTTP/1.1 201 Created';
-        $response['body'] = null;
+        
         return $response;
     }
 
-    private function update($id)
+    public function update($id)
     {
         $result = $this->intern->read($id);
         if (! $result) {
@@ -89,12 +74,12 @@ class InternController{
         return $response;
     }
 
-    private function delete($id)
+    public function delete($id)
     {
-        $result = $this->intern->read($id);
-        if (! $result) {
-            return $this->notFoundResponse();
-        }
+        // $result = $this->intern->read($id);
+        // if (! $result) {
+        //     return $this->notFoundResponse();
+        // }
         $this->intern->delete($id);
         $response['status_code_header'] = 'HTTP/1.1 200 OK';
         $response['body'] = null;
@@ -109,6 +94,10 @@ class InternController{
         if (! isset($input['Surname'])) {
             return false;
         }
+        if (! isset($input['idG'])) {
+            return false;
+        }
+
         return true;
     }
 

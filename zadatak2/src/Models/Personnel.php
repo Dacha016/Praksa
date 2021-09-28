@@ -23,14 +23,16 @@ abstract class Personnel {
             exit($e->getMessage());
         }
     }
-    public  function create(Array $p){
+    public  function create(array $p){
         $q="INSERT INTO ".$this->table. " (Name,Surname,idG) VALUES (:name, :surname,:idG)";
         try{
             $stmt=$this->conn->prepare($q);
+
             $stmt->bindParam(":name",$p["Name"]);
             $stmt->bindParam(":surname",$p["Surname"]);
             $stmt->bindParam(":idG",$p["idG"]);
             $stmt->execute();
+     
             return $stmt;
         }catch(\PDOException $e){
             exit($e->getMessage());
