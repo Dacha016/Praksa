@@ -53,38 +53,30 @@ class InternController{
         // $response['body'] = json_encode($in);
         // return $response;
     }
-
-    public function create()
-    {
-        if (! $this->validate( $input)) {
+    public function create(){
+        $input = (array) json_decode(file_get_contents('php://input'), TRUE);
+        if (! $this->validate($input)) {
             return $this->unprocessableEntityResponse();
         }
-        $res=$this->intern->create($input);
-        var_dump($res);
+        $this->intern->create($input);
         $response['status_code_header'] = 'HTTP/1.1 201 Created';
-        
-        return $response;
+        $response['body'] = null;
     }
-
-    public function update($internId)
-    {
+    public function update($internId){
         $result = $this->intern->read($internId);
-        $row= $result->fetch(\PDO::FETCH_ASSOC);
-        
-        if (! $row) {
+        if (! $result) {
             return $this->notFoundResponse();
         }
-        
-        // if (! $this->validate($input)) {
-        //     return $this->unprocessableEntityResponse();
-        // }
-        
-        $this->intern->update($id, $input);
-       
+        $input = (array) json_decode(file_get_contents('php://input'), TRUE);
+        if (! $this->validate($input)) {
+            return $this->unprocessableEntityResponse();
+        }
+        $this->intern->update($internId, $input);
         $response['status_code_header'] = 'HTTP/1.1 200 OK';
         $response['body'] = null;
         return $response;
     }
+
 
     public function delete($internId){
         $result = $this->intern->read($internId);

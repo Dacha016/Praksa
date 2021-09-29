@@ -28,6 +28,7 @@ class ComposerStaticInit5494b667fca8def96a1cf08e16cde14f
         'App\\Models\\Intern' => __DIR__ . '/../..' . '/src/Models/Intern.php',
         'App\\Models\\Mentor' => __DIR__ . '/../..' . '/src/Models/Mentor.php',
         'App\\Models\\Personnel' => __DIR__ . '/../..' . '/src/Models/Personnel.php',
+        'App\\Routes\\Router' => __DIR__ . '/../..' . '/src/Routes/Router.php',
         'Composer\\InstalledVersions' => __DIR__ . '/..' . '/composer/InstalledVersions.php',
     );
 

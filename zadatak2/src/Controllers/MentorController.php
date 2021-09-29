@@ -1,75 +1,69 @@
 <?php
 namespace App\Controllers;
-require realpath("../../vendor/autoload.php");
-//use App\Config\Connection;
+
 use App\Models\Mentor;
 class MentorController{
-    protected $db;
-    protected $requireMrthod;
-    protected $internId;
-    public function __construct( $db, $requestMethod, $mentorId){
+    public $db;
+    protected $requestMethod;
+    protected  $mentorId;
+    protected $mentor;
+    public function __construct( $db, $requestMethod,$mentorId){
+        $this->db = $db;
         $this->requestMethod = $requestMethod;
         $this->mentorId = $mentorId;
         $this->mentor = new Mentor($db);
     }
-    public function processRequest(){
-        switch ($this->requestMethod){
-            case 'GET':
-                if ($this->mentorId) {
-                    $response = $this->read($this->mentorId);
-                } else {
-                    $response = $this->readAll();
-                };
-                break;
-            case 'POST':
-                $response = $this->create();
-                break;
-            case 'PUT':
-                $response = $this->update($this->mentorId);
-                break;
-            case 'DELETE':
-                $response = $this->delete($this->mentorId);
-                break;
-            default:
-                $response = $this->notFoundResponse();
-                break;
-        }
-        header($response['status_code_header']);
-        if ($response['body']) {
-            echo $response['body'];
-        }
-    }
 
-    private function readAll(){
+    public function readAll(){
         $result = $this->mentor->readAll();
         $response['status_code_header'] = 'HTTP/1.1 200 OK';
-        $response = json_encode($result);
-        return $response;
+        $n=$result->rowCount();
+        if($n>0){
+            $inArr=[];
+            while($row= $result->fetch(\PDO::FETCH_ASSOC)){
+                extract($row);
+                $in=[
+                    "id"=>$row["id"],
+                    "Name"=>$row["Name"],
+                    "Surname"=>$row["Surname"],
+                    "idG"=>$row["idG"]
+                ];
+                array_push($inArr,$in);
+            }
+        echo json_encode($inArr);
+        // $response['body'] = json_encode($in);
+        // return $response;
+        }
     }
 
-    private function read($id){
-        $result = $this->mentor->read($id);
-        if (! $result) {
+    public function read($mentorId){
+         $result = $this->mentor->read($mentorId);
+         if (! $result) {
             return $this->notFoundResponse();
         }
         $response['status_code_header'] = 'HTTP/1.1 200 OK';
-        $response['body'] = json_encode($result);
-        return $response;
+         $row= $result->fetch(\PDO::FETCH_ASSOC);
+         $in=[
+            "id"=>$row["id"],
+            "Name"=>$row["Name"],
+            "Surname"=>$row["Surname"],
+            "idG"=>$row["idG"]
+        ];
+        echo json_encode($in);
+        // $response['body'] = json_encode($in);
+        // return $response;
     }
-
-    private function create(){
+    public function create(){
         $input = (array) json_decode(file_get_contents('php://input'), TRUE);
         if (! $this->validate($input)) {
             return $this->unprocessableEntityResponse();
         }
-        $this->mentor->insert($input);
+        $this->mentor->create($input);
         $response['status_code_header'] = 'HTTP/1.1 201 Created';
         $response['body'] = null;
-        return $response;
     }
-
-    private function update($id){
-        $result = $this->mentor->read($id);
+    public function update($mentorId){
+        $result = $this->mentor->read($mentorId);
         if (! $result) {
             return $this->notFoundResponse();
         }
@@ -77,20 +71,23 @@ class MentorController{
         if (! $this->validate($input)) {
             return $this->unprocessableEntityResponse();
         }
-        $this->mentor->update($id, $input);
+        $this->mentor->update($mentorId, $input);
         $response['status_code_header'] = 'HTTP/1.1 200 OK';
         $response['body'] = null;
         return $response;
     }
 
-    private function delete($id){
-        $result = $this->mentor->read($id);
-        if (! $result) {
+
+    public function delete($mentorId){
+        $result = $this->mentor->read($mentorId);
+        $row= $result->fetch(\PDO::FETCH_ASSOC);
+        if (! $row) {
             return $this->notFoundResponse();
+            
+        }else{
+            $this->mentor->delete($mentorId);
+            $response['status_code_header'] = 'HTTP/1.1 200 OK';
         }
-        $this->mentor->delete($id);
-        $response['status_code_header'] = 'HTTP/1.1 200 OK';
-        $response['body'] = null;
         return $response;
     }
 
@@ -101,6 +98,10 @@ class MentorController{
         if (! isset($input['Surname'])) {
             return false;
         }
+        if (! isset($input['idG'])) {
+            return false;
+        }
+
         return true;
     }
 

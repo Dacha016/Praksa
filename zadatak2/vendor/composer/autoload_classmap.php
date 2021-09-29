@@ -13,5 +13,6 @@ return array(
     'App\\Models\\Intern' => $baseDir . '/src/Models/Intern.php',
     'App\\Models\\Mentor' => $baseDir . '/src/Models/Mentor.php',
     'App\\Models\\Personnel' => $baseDir . '/src/Models/Personnel.php',
+    'App\\Routes\\Router' => $baseDir . '/src/Routes/Router.php',
     'Composer\\InstalledVersions' => $vendorDir . '/composer/InstalledVersions.php',
 );
